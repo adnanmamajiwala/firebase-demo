@@ -1,7 +1,11 @@
 <#macro application_layout>
     <@application_base_layout>
-    <nav class="navbar navbar-expand-lg justify-content-center">
-        <a class="navbar-brand" href="#">Firebase</a>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand text-white">Firebase Demo</a>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </nav>
     <div class="container">
         <#nested/>

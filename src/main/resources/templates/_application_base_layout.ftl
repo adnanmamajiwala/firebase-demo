@@ -12,6 +12,10 @@
     <link href="<@spring.url '/vendor/stylesheets/bootstrap.min.css'/>" rel="stylesheet"/>
     <link href="<@spring.url '/vendor/stylesheets/bootstrap-grid.min.css'/>" rel="stylesheet"/>
     <link href="<@spring.url '/vendor/stylesheets/bootstrap-reboot.min.css'/>" rel="stylesheet"/>
+    <link href="<@spring.url '/vendor/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css'/>" rel="stylesheet"/>
+</head>
+<body>
+    <#nested/>
 
     <script src="<@spring.url '/vendor/javascripts/jquery-3.3.1.min.js'/>"></script>
     <script src="<@spring.url '/vendor/javascripts/popper.min.js'/>"></script>
@@ -21,10 +25,6 @@
     <script src="<@spring.url '/javascripts/main.js'/>"></script>
     <script src="<@spring.url '/javascripts/application.js'/>"></script>
     <script src="<@spring.url '/javascripts/behaviors/data-submit.js'/>"></script>
-
-</head>
-<body>
-    <#nested/>
 </body>
 </html>
 </#macro>
