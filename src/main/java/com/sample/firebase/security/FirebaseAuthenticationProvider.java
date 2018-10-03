@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import io.vavr.control.Try;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -23,12 +24,11 @@ public class FirebaseAuthenticationProvider implements AuthenticationProvider {
         System.out.println("Inside authenticate ");
         Try.of(() -> objectWriter.writeValueAsString(authentication))
                 .onSuccess(System.out::println);
-        UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) authentication;
 
-        if (!authentication.getPrincipal().equals("admin@hello.com") && authenticationToken.isAuthenticated()) {
-            return null;
+        if (authentication.getPrincipal().equals("admin@hello.com") && authentication.getCredentials().equals("Pass123")) {
+            return new UsernamePasswordAuthenticationToken("admin@hello.com", "Pass123", getAuthorities());
         }
-        return new UsernamePasswordAuthenticationToken("admin@hello.com", "Pass123", getAuthorities());
+        throw new BadCredentialsException("Invalid credentials");
     }
 
     private List<GrantedAuthority> getAuthorities() {

@@ -1,7 +1,5 @@
 package com.sample.firebase.user;
 
-import com.sample.firebase.user.User;
-import com.sample.firebase.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
