@@ -21,10 +21,13 @@
     <script src="<@spring.url '/vendor/javascripts/popper.min.js'/>"></script>
     <script src="<@spring.url '/vendor/javascripts/bootstrap.min.js'/>"></script>
     <script src="<@spring.url '/vendor/javascripts/bootstrap.bundle.min.js'/>"></script>
+    <script src="<@spring.url '/vendor/javascripts/firebase-5.5.2.min.js'/>"></script>
+    <script src="<@spring.url '/vendor/javascripts/firebase-auth-5.5.2.min.js'/>"></script>
 
     <script src="<@spring.url '/javascripts/main.js'/>"></script>
     <script src="<@spring.url '/javascripts/application.js'/>"></script>
     <script src="<@spring.url '/javascripts/behaviors/data-submit.js'/>"></script>
+    <script src="<@spring.url '/javascripts/behaviors/login.js'/>"></script>
 </body>
 </html>
 </#macro>

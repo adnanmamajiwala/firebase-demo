@@ -8,7 +8,7 @@
         var $form = $element.parents().find("#" + formId);
 
         function submitForm() {
-            $form.submit();
+            // $form.submit();
         }
 
         $element.on("click", submitForm);
