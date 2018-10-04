@@ -12,11 +12,6 @@ public class SigninController {
         return "login/signin";
     }
 
-//    @PostMapping("/login")
-//    public String loginPost(){
-//        return "redirect:/home";
-//    }
-
     @GetMapping("/home")
     public String home(){
         return "index";

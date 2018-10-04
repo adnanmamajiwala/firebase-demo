@@ -6,8 +6,6 @@ import com.google.firebase.database.DatabaseError;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.MonoSink;
 
-import static org.springframework.core.GenericTypeResolver.resolveTypeArgument;
-
 @RequiredArgsConstructor()
 public class ChildEventListenerImpl<T> implements ChildEventListener {
 
@@ -15,8 +13,7 @@ public class ChildEventListenerImpl<T> implements ChildEventListener {
 
     @Override
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-        Class<T> genericType = (Class<T>) resolveTypeArgument(getClass(), ChildEventListenerImpl.class);
-        T value = dataSnapshot.getValue(genericType);
+        T value = (T) dataSnapshot.getValue();
         monoSink.success(value);
     }
 
@@ -39,6 +36,4 @@ public class ChildEventListenerImpl<T> implements ChildEventListener {
     public void onCancelled(DatabaseError databaseError) {
         System.out.println("The findByName failed: " + databaseError.getCode());
     }
-
-
 }
