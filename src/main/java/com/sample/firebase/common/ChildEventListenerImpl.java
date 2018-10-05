@@ -3,17 +3,19 @@ package com.sample.firebase.common;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.sample.firebase.user.User;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.MonoSink;
 
 @RequiredArgsConstructor()
 public class ChildEventListenerImpl<T> implements ChildEventListener {
 
-    private final MonoSink<T> monoSink;
+    private final MonoSink<User> monoSink;
 
     @Override
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-        T value = (T) dataSnapshot.getValue();
+        System.out.println(dataSnapshot.toString());
+        User value = dataSnapshot.getValue(User.class);
         monoSink.success(value);
     }
 

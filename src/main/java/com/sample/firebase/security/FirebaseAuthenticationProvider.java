@@ -1,8 +1,8 @@
 package com.sample.firebase.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import io.vavr.control.Try;
+import com.sample.firebase.user.User;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,25 +10,42 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class FirebaseAuthenticationProvider implements AuthenticationProvider {
+
+    private final FirebaseAuthenticationService firebaseAuthenticationService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        ObjectWriter objectWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
-        System.out.println("Inside authenticate ");
-        Try.of(() -> objectWriter.writeValueAsString(authentication))
-                .onSuccess(System.out::println);
+        log.debug("Inside authenticate ");
 
-        if (authentication.getPrincipal().equals("admin@hello.com") && authentication.getCredentials().equals("Pass123")) {
-            return new UsernamePasswordAuthenticationToken("admin@hello.com", "Pass123", getAuthorities());
+        if (isNull(authentication.getCredentials())) {
+            throw new BadCredentialsException("Invalid credentials");
         }
-        throw new BadCredentialsException("Invalid credentials");
+
+        return validate(authentication);
+    }
+
+    private Authentication validate(Authentication authentication) {
+        String token = (String) authentication.getCredentials();
+
+        if (authentication.isAuthenticated()) {
+            firebaseAuthenticationService.verifyToken(token);
+            return authentication;
+        } else {
+            User user = firebaseAuthenticationService.retrieveUser(token);
+            return new UsernamePasswordAuthenticationToken(user, token, getAuthorities());
+        }
     }
 
     private List<GrantedAuthority> getAuthorities() {
@@ -39,7 +56,6 @@ public class FirebaseAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        System.out.println("Inside supports " + aClass.getName());
-        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(aClass);
+        return aClass.isAssignableFrom(UsernamePasswordAuthenticationToken.class);
     }
 }

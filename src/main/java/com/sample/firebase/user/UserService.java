@@ -33,4 +33,13 @@ public class UserService {
                 .addChildEventListener(new ChildEventListenerImpl<User>(monoSink)));
     }
 
+    public Mono<User> findByUuid(String uuid){
+        DatabaseReference reference = databaseReference.child("users_table");
+        return Mono.create(monoSink -> reference
+                .orderByChild("name")
+                .equalTo("Adnan")
+                .limitToFirst(1)
+                .addChildEventListener(new ChildEventListenerImpl<User>(monoSink)));
+    }
+
 }

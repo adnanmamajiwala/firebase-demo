@@ -2,7 +2,7 @@
     "use strict";
 
     $(document).ready(function () {
-        window.mcx.bindBehaviors(document);
+        window.firebasedemo.bindBehaviors(document);
     });
 
 })(window, jQuery);

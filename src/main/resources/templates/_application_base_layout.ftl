@@ -21,8 +21,8 @@
     <script src="<@spring.url '/vendor/javascripts/popper.min.js'/>"></script>
     <script src="<@spring.url '/vendor/javascripts/bootstrap.min.js'/>"></script>
     <script src="<@spring.url '/vendor/javascripts/bootstrap.bundle.min.js'/>"></script>
-    <script src="<@spring.url '/vendor/javascripts/firebase-5.5.2.min.js'/>"></script>
-    <script src="<@spring.url '/vendor/javascripts/firebase-auth-5.5.2.min.js'/>"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
 
     <script src="<@spring.url '/javascripts/main.js'/>"></script>
     <script src="<@spring.url '/javascripts/application.js'/>"></script>
