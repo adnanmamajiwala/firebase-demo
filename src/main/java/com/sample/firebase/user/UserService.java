@@ -24,22 +24,22 @@ public class UserService {
         users.updateChildrenAsync(map);
     }
 
-    public Mono<User> findByName(String name){
+    public Mono<User> findByName(String name) {
         DatabaseReference reference = databaseReference.child("users_table");
         return Mono.create(monoSink -> reference
                 .orderByChild("name")
                 .equalTo(name)
                 .limitToFirst(1)
-                .addChildEventListener(new ChildEventListenerImpl<User>(monoSink)));
+                .addChildEventListener(new ChildEventListenerImpl<>(monoSink, User.class)));
     }
 
-    public Mono<User> findByUuid(String uuid){
+    public Mono<User> findByUuid(String uuid) {
         DatabaseReference reference = databaseReference.child("users_table");
         return Mono.create(monoSink -> reference
                 .orderByChild("name")
                 .equalTo("Adnan")
                 .limitToFirst(1)
-                .addChildEventListener(new ChildEventListenerImpl<User>(monoSink)));
+                .addChildEventListener(new ChildEventListenerImpl<>(monoSink, User.class)));
     }
 
 }

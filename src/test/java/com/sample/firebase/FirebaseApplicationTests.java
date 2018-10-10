@@ -8,8 +8,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import reactor.core.Disposable;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @RunWith(SpringRunner.class)
@@ -18,7 +18,6 @@ public class FirebaseApplicationTests {
 
     @Autowired
     private UserService service;
-    private Disposable subscribe;
 
     @After
     public void tearDown() throws Exception {
@@ -28,16 +27,10 @@ public class FirebaseApplicationTests {
     @Test
     public void contextLoads() {
 
-//        service.insert(getUser("Adnan"));
-//        service.insert(getUser("tasneem"));
-        service.insert(getUser("Hatim"));
+        User user = service.findByName("Adnan").block();
 
-        subscribe = service.findByName("Adnan")
-                .subscribe(u -> {
-                    System.out.println(u);
-                    subscribe.dispose();
-                });
-        System.out.println("Hello World");
+        assertThat(user).isNotNull();
+        assertThat(user.getName()).isEqualToIgnoringCase("adnan");
 
     }
 

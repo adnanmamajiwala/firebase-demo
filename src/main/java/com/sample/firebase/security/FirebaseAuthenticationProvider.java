@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,9 +17,9 @@ import java.util.List;
 
 import static java.util.Objects.isNull;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class FirebaseAuthenticationProvider implements AuthenticationProvider {
 
     private final FirebaseAuthenticationService firebaseAuthenticationService;

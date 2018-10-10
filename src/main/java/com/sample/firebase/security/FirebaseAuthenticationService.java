@@ -29,7 +29,7 @@ public class FirebaseAuthenticationService {
         try {
             return FirebaseAuth.getInstance().verifyIdToken(token);
         } catch (FirebaseAuthException e) {
-            throw new BadCredentialsException(e.getErrorCode() + e.getMessage());
+            throw new BadCredentialsException(e.getErrorCode() + e.getMessage(), e);
         }
     }
 }

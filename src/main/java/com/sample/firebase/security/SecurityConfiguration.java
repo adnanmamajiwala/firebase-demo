@@ -24,17 +24,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http
-                .authorizeRequests()
-                    .antMatchers("/vendor/**",  "/javascripts/**").permitAll()
-                    .anyRequest().authenticated()
-                .and()
-                    .formLogin()
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/home", true)
-                        .permitAll()
-                .and()
-                    .logout()
-                        .permitAll();
+            .authorizeRequests()
+                .antMatchers("/vendor/**",  "/javascripts/**").permitAll()
+                .anyRequest().authenticated()
+            .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/home", true)
+                    .permitAll()
+            .and()
+                .logout()
+                    .permitAll();
         // @formatter:on
     }
 
