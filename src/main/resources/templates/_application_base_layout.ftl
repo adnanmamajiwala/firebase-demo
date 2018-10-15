@@ -24,9 +24,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase-auth.js"></script>
 
-    <script src="<@spring.url '/javascripts/main.js'/>"></script>
     <script src="<@spring.url '/javascripts/application.js'/>"></script>
-    <script src="<@spring.url '/javascripts/behaviors/data-submit.js'/>"></script>
     <script src="<@spring.url '/javascripts/behaviors/login.js'/>"></script>
 </body>
 </html>

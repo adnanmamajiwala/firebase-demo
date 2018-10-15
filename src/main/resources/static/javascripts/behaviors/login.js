@@ -8,6 +8,7 @@
         var $password = $element.parents().find("#password");
         var $loginSpinner = $element.parents().find("#loginSpinner");
         var $form = $element.parents().find("#login");
+        var $errorFlash = $element.parents().find("#error-flash");
 
         // Initialize Firebase
         var config = {
@@ -22,7 +23,7 @@
 
         function submitForm() {
             $loginSpinner.modal({
-                backdrop: 'static',
+                backdrop: "static",
                 show : true
             });
 
@@ -36,9 +37,9 @@
                         });
                 })
                 .catch(function (error) {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    console.error(error);
+                    console.error("["+ error.code+ "] : " + error.message);
+                    $errorFlash.find("p").text(error.message);
+                    $errorFlash.show();
                     $loginSpinner.modal("hide");
                 });
         }
